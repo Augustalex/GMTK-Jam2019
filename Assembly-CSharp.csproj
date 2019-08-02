@@ -62,7 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\TestingScript.cs" />
+    <Compile Include="Assets\Scripts\TestScript.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/ActiveUnityProjects/GMTK-Jam2019/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
