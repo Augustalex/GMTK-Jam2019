@@ -18,11 +18,9 @@ public class PlayerMovement : MonoBehaviour
         var vertical = Input.GetAxis("Vertical");
         if (horizontal > 0 || horizontal < -0 || vertical < -0 || vertical > 0)
         {
-            var hor = horizontal > 0 ? 1 : -1;
-            var ver = vertical > 0 ? 1 : -1;
             var movement = new Vector2(
-                hor * Time.deltaTime * 30,
-                ver * Time.deltaTime * 30
+                horizontal * Time.deltaTime * 30,
+                vertical * Time.deltaTime * 30
             );
             GetComponent<Rigidbody2D>().AddForce(
                 movement,
