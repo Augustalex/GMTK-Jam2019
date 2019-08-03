@@ -55,9 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\PlayerMovement.cs" />
-    <Compile Include="Assets\Scenes\EnemyMovement.cs" />
-    <Compile Include="Assets\Scenes\SecondScript.cs" />
-    <Compile Include="Assets\Scenes\TestScript.cs" />
+    <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\SecondScript.cs" />
+    <Compile Include="Assets\Scripts\TestScript.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>S:/Projects/GMTK-Jam2019/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
