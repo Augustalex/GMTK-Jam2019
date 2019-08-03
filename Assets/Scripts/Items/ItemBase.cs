@@ -3,56 +3,67 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D), typeof(SpriteRenderer))]
-public class ItemBase : MonoBehaviour
+public abstract class ItemBase : MonoBehaviour
 {
-	public CircleCollider2D circleCol;
+    public CircleCollider2D circleCol;
 
-	private void Reset()
-	{
-		GetComponent<CircleCollider2D>().isTrigger = true;
-		gameObject.tag = "Item";
-	}
-
-	private void Awake()
-	{
-		circleCol = GetComponent<CircleCollider2D>();
-	}
-
-	void Start()
+    private void Reset()
     {
-        
+        GetComponent<CircleCollider2D>().isTrigger = true;
+        gameObject.tag = "Item";
+    }
+
+    private void Awake()
+    {
+        circleCol = GetComponent<CircleCollider2D>();
+    }
+
+    void Start()
+    {
     }
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Use();
+        }
     }
 
-	public void Pickup()
-	{
+    protected abstract void Use();
 
-	}
+    protected void DisposeOf()
+    {
+        if (PlayerItemHolder.instance.heldItem == this)
+        {
+            PlayerItemHolder.instance.heldItem = null;
+            Destroy(gameObject);
+        }
+    }
 
-	protected virtual void OnTriggerEnter2D(Collider2D collision)
-	{
-		if(collision.gameObject.tag == "Player")
-		{
-			var itemHolder = collision.GetComponent<PlayerItemHolder>();
+    public void Pickup()
+    {
+    }
 
-			itemHolder.nearbyItem = this;
-		}
-	}
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            var itemHolder = collision.GetComponent<PlayerItemHolder>();
 
-	protected virtual void OnTriggerExit2D(Collider2D collision)
-	{
-		if (collision.gameObject.tag == "Player")
-		{
-			var itemHolder = collision.GetComponent<PlayerItemHolder>();
-			if(itemHolder.nearbyItem == this)
-			{
-				itemHolder.nearbyItem = null;
-			}
+            itemHolder.nearbyItem = this;
+        }
+    }
 
-		}
-	}
+    protected virtual void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            var itemHolder = collision.GetComponent<PlayerItemHolder>();
+            if (itemHolder.nearbyItem == this)
+            {
+                itemHolder.nearbyItem = null;
+            }
+        }
+    }
 }

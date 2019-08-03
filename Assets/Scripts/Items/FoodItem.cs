@@ -14,7 +14,12 @@ public class FoodItem : ItemBase
         
     }
 
-	protected override void OnTriggerEnter2D(Collider2D collision)
+    protected override void Use()
+    {
+	    
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D collision)
 	{
 		base.OnTriggerEnter2D(collision);
 

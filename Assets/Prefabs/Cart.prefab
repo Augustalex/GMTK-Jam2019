@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2867548897590766419}
   - component: {fileID: 2867548897590766430}
   - component: {fileID: 1926614809}
+  - component: {fileID: 1560849813}
   m_Layer: 0
   m_Name: Cart
   m_TagString: Cart
@@ -66,7 +67,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b0fa3ad13641209f1ba1debaf4e5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 10
+  Score: 0
+--- !u!114 &1560849813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867548897590766431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9048b46c98c00b4eb0f4abfae63953d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
 --- !u!1 &2867548898682933547
 GameObject:
   m_ObjectHideFlags: 0

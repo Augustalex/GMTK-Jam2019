@@ -61,9 +61,11 @@
     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\Items\CartItemHolder.cs" />
     <Compile Include="Assets\Scripts\Items\CartTrigger.cs" />
+    <Compile Include="Assets\Scripts\Items\EnergyDrinkItem.cs" />
     <Compile Include="Assets\Scripts\Items\FoodItem.cs" />
     <Compile Include="Assets\Scripts\Items\ItemBase.cs" />
     <Compile Include="Assets\Scripts\Items\PlayerItemHolder.cs" />
+    <Compile Include="Assets\Scripts\Items\PlayerRushEffect.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\SecondScript.cs" />
     <Compile Include="Assets\Scripts\TestScript.cs" />
