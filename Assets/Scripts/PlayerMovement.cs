@@ -5,7 +5,7 @@ using System.Diagnostics.SymbolStore;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-    private Vector2 _originalScale;
+    private Vector3 _originalScale;
     private Rigidbody2D _body;
     private Animator _animator;
 
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour {
 
             if (Math.Abs(horizontal) > 0) {
                 var direction = Math.Sign(horizontal);
-                transform.localScale = new Vector2(_originalScale.x * direction, _originalScale.y);
+                transform.localScale = new Vector3(_originalScale.x * direction, _originalScale.y, _originalScale.z);
             }
         }
         else {
