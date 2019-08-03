@@ -16,13 +16,17 @@ public class PlayerMovement : MonoBehaviour
     {
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
-        if (horizontal > 0.1f || horizontal < 0.1f || vertical < 0.1f || vertical > 0.1f)
+        if (horizontal > 0 || horizontal < -0 || vertical < -0 || vertical > 0)
         {
+            var hor = horizontal > 0 || horizontal < 0 ? (horizontal > 0 ? 1 : -1) : 0;
+            var ver = vertical > 0 || vertical < 0 ? (vertical > 0 ? 1 : -1) : 0;
+            var movement = new Vector2(
+                hor * Time.deltaTime * 3000,
+                ver * Time.deltaTime * 3000
+            );
             GetComponent<Rigidbody2D>().AddForce(
-                new Vector2(
-                    horizontal * Time.deltaTime * 10000,
-                    vertical * Time.deltaTime * 10000
-                )
+                movement,
+                ForceMode2D.Force
             );
             GetComponent<Animator>().SetTrigger("Walk");
 
