@@ -20,7 +20,10 @@ public class PlayerItemHolder : MonoBehaviour
     {
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			PickupItem();
+			if (heldItem == null)
+				PickupItem();
+			else
+				DropItem();
 		}
     }
 
