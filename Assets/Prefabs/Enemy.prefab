@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DiscoverPlayerRadius: 10
-  Speed: 10
+  Speed: 8
 --- !u!61 &6797561131429672303
 BoxCollider2D:
   m_ObjectHideFlags: 0

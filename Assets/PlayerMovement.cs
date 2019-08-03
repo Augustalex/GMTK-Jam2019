@@ -4,47 +4,44 @@ using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour {
+    private Vector2 _originalScale;
+    private Rigidbody2D _body;
+    private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
+
+    private void Start() {
+        _originalScale = transform.localScale;
+        _body = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
+
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
-        if (horizontal > 0 || horizontal < -0 || vertical < -0 || vertical > 0)
-        {
+        _animator = GetComponentInChildren<Animator>();
+        if (horizontal > 0 || horizontal < -0 || vertical < -0 || vertical > 0) {
             var movement = new Vector2(
-                horizontal * Time.deltaTime * 30,
-                vertical * Time.deltaTime * 30
+                horizontal * Time.deltaTime * 60,
+                vertical * Time.deltaTime * 60
             );
-            GetComponent<Rigidbody2D>().AddForce(
+            _body.AddForce(
                 movement,
                 ForceMode2D.Force
             );
-            GetComponentInChildren<Animator>().SetTrigger("Walk");
+            _animator.SetTrigger("Walk");
 
-            if (horizontal < 0)
-            {
-                var scale = transform.localScale;
-                if (scale.x > 0)
-                {
-                    transform.localScale = new Vector3(-1, scale.y, scale.z);
-                }
-            }
-            else if (horizontal > 0)
-            {
-                var scale = transform.localScale;
-                if (scale.x < 0)
-                {
-                    transform.localScale = new Vector3(1, scale.y, scale.z);
-                }
+            if (Math.Abs(horizontal) > 0) {
+                var direction = Math.Sign(horizontal);
+                transform.localScale = new Vector2(_originalScale.x * direction, _originalScale.y);
             }
         }
-        else
-        {
-            GetComponentInChildren<Animator>().SetTrigger("Idle");
+        else {
+            _animator.SetTrigger("Idle");
         }
-        
-        GetComponentInChildren<SpriteRenderer>().sortingOrder = -(int)(transform.position.y * 100) + 100;
+
+        //_spriteRenderer.sortingOrder = -(int) (transform.position.y * 100);
+        _spriteRenderer.sortingOrder = 2;
     }
 }
