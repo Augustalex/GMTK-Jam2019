@@ -20,8 +20,8 @@ public class EnemyMovement : MonoBehaviour {
 
     private void Update() {
         if (Vector2.Distance(_player.transform.position, transform.position) <= DiscoverPlayerRadius) {
-            var direciton = (_player.transform.position - transform.position).normalized;
-            _body.AddForce(direciton * Speed * 1.1f, ForceMode2D.Force);
+            var direction = (_player.transform.position - transform.position).normalized;
+            _body.AddForce(direction * Speed * 1.1f, ForceMode2D.Force);
         }
         else {
             _body.AddForce(_currentDirection * Speed, ForceMode2D.Force);
