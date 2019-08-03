@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour {
     private Rigidbody2D _body;
     private Vector2 _currentDirection;
     private Vector2 _nextDirection;
+    private bool seingPlayer;
 
     private void Awake() {
         _player = GameObject.FindWithTag("Player");
@@ -30,15 +31,17 @@ public class EnemyMovement : MonoBehaviour {
     private void Update() {
         var directionToPlayer = (_player.transform.position - transform.position).normalized;
         var distanceToPlayer = Vector2.Distance(_player.transform.position, transform.position);
-        var playerWithinSight = Vector2.Angle(_currentDirection, directionToPlayer) <= 22.5;
+        var playerWithinSight = Vector2.Angle(_currentDirection, directionToPlayer) <= 45;
         var playerWithinDistance = distanceToPlayer <= DiscoverPlayerRadius;
         var objectInTheWay = IsPlayerHidden();
-
+        
         if (playerWithinDistance && playerWithinSight && !objectInTheWay) {
+            seingPlayer = true;
             _body.AddForce(_currentDirection * Speed * 0.9f, ForceMode2D.Force);
             _currentDirection = directionToPlayer;
         }
         else {
+            seingPlayer = false;
             _body.AddForce(_currentDirection * Speed, ForceMode2D.Force);
             if (Random.value < 0.04f) {
                 _nextDirection = Random.insideUnitCircle;
@@ -52,17 +55,15 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     private bool IsPlayerHidden() {
-        return false;
-        //TODO: FIX
-        var direction = transform.position - _player.transform.position;
-        var dist = Vector2.Distance(transform.position, _player.transform.position);
         var results = new List<RaycastHit2D>();
         var layerMask = ~ LayerMask.GetMask("Enemy");
-        if (Physics2D.Raycast(transform.position, direction, new ContactFilter2D {
+        var filter = new ContactFilter2D {
             useLayerMask = true,
             layerMask = layerMask
-        }, results, dist) > 0) {
-            return results.Any(x => !x.collider.CompareTag("Player"));
+        };
+        
+        if (Physics2D.Linecast(transform.position, _player.transform.position, filter, results) > 0) {
+            return results.Any(x => !x.collider.CompareTag("Player"));  
         }
 
         return false;

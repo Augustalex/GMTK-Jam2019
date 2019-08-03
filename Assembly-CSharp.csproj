@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\Cart.cs" />
     <Compile Include="Assets\Scripts\EndGameDoor.cs" />
     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\Items\CartItemHolder.cs" />
     <Compile Include="Assets\Scripts\Items\CartTrigger.cs" />
     <Compile Include="Assets\Scripts\Items\FoodItem.cs" />
     <Compile Include="Assets\Scripts\Items\ItemBase.cs" />

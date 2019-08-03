@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5846975050564686463}
   - component: {fileID: 3989832615872570452}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6797561131429672298}
   - component: {fileID: 6797561131429672303}
   - component: {fileID: 6797561131429672299}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,9 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b1c84591f354e4dab69e78b2154cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DiscoverPlayerRadius: 10
   Face: {fileID: 7036132014897148773}
-  Speed: 8
 --- !u!61 &6797561131429672303
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -237,7 +235,7 @@ GameObject:
   - component: {fileID: 6797561133243289063}
   - component: {fileID: 6797561133243289062}
   - component: {fileID: 6797561133243289061}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5967194075555336495}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
