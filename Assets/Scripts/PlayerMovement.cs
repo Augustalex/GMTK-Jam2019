@@ -8,12 +8,10 @@ public class PlayerMovement : MonoBehaviour {
     private Vector2 _originalScale;
     private Rigidbody2D _body;
     private Animator _animator;
-    private SpriteRenderer _spriteRenderer;
 
     private void Start() {
         _originalScale = transform.localScale;
         _body = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -23,8 +21,8 @@ public class PlayerMovement : MonoBehaviour {
         _animator = GetComponentInChildren<Animator>();
         if (horizontal > 0 || horizontal < -0 || vertical < -0 || vertical > 0) {
             var movement = new Vector2(
-                horizontal * Time.deltaTime * 60,
-                vertical * Time.deltaTime * 60
+                horizontal * Time.deltaTime * 260,
+                vertical * Time.deltaTime * 260
             );
             _body.AddForce(
                 movement,
@@ -40,8 +38,5 @@ public class PlayerMovement : MonoBehaviour {
         else {
             _animator.SetTrigger("Idle");
         }
-
-        //_spriteRenderer.sortingOrder = -(int) (transform.position.y * 100);
-        _spriteRenderer.sortingOrder = 2;
     }
 }
