@@ -26,10 +26,10 @@ public class EnemyMovement : MonoBehaviour {
         _currentDirection = Random.insideUnitCircle;
         _nextDirection = Random.insideUnitCircle;
 
-        var faceScale = new Vector3(DiscoverPlayerRadius, DiscoverPlayerRadius, 1);
+        var faceScale = new Vector3(DiscoverPlayerRadius * 0.2f, DiscoverPlayerRadius * 0.2f, 1);
         var sightSprite = Face.GetComponentInChildren<SpriteRenderer>();
         sightSprite.transform.localScale = faceScale;
-        sightSprite.transform.Translate(DiscoverPlayerRadius / 2.0f, 0, 0);
+        sightSprite.transform.Translate(DiscoverPlayerRadius * 0.25f, 0, 0);
     }
 
     private bool CanSeeObject(Vector3 position, Func<GameObject, bool> isObject) {
