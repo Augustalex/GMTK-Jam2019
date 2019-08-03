@@ -6,11 +6,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -26,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
                 movement,
                 ForceMode2D.Force
             );
-            GetComponent<Animator>().SetTrigger("Walk");
+            GetComponentInChildren<Animator>().SetTrigger("Walk");
 
             if (horizontal < 0)
             {
@@ -47,7 +42,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            GetComponent<Animator>().SetTrigger("Idle");
+            GetComponentInChildren<Animator>().SetTrigger("Idle");
         }
+        
+        GetComponentInChildren<SpriteRenderer>().sortingOrder = -(int)(transform.position.y * 100) + 100;
     }
 }
