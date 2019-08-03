@@ -32,6 +32,11 @@ public abstract class ItemBase : MonoBehaviour
 
     protected abstract void Use();
 
+    public virtual void OnDrop()
+    {
+        
+    }
+
     protected void DisposeOf()
     {
         if (PlayerItemHolder.instance.heldItem == this)
