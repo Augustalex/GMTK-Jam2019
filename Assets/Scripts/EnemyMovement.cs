@@ -31,4 +31,10 @@ public class EnemyMovement : MonoBehaviour {
             }
         }
     }
+
+    private void OnCollisionEnter(Collision other) {
+        if (Random.value < 0.2f) {
+            _currentDirection = Random.insideUnitCircle;
+        }
+    }
 }
