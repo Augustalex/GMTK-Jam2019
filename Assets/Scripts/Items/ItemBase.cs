@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(CircleCollider2D), typeof(SpriteRenderer))]
 public class ItemBase : MonoBehaviour
 {
 	private void Reset()
 	{
 		GetComponent<CircleCollider2D>().isTrigger = true;
+		gameObject.tag = "Item";
 	}
 
 	void Start()
@@ -25,7 +26,7 @@ public class ItemBase : MonoBehaviour
 
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	protected virtual void OnTriggerEnter2D(Collider2D collision)
 	{
 		if(collision.gameObject.tag == "Player")
 		{
@@ -35,7 +36,7 @@ public class ItemBase : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerExit2D(Collider2D collision)
+	protected virtual void OnTriggerExit2D(Collider2D collision)
 	{
 		if (collision.gameObject.tag == "Player")
 		{

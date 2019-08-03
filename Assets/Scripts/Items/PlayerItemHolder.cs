@@ -41,7 +41,7 @@ public class PlayerItemHolder : MonoBehaviour
 		if (heldItem == null)
 			return;
 
-
-
+		heldItem.transform.parent = null;
+		heldItem = null;
 	}
 }
