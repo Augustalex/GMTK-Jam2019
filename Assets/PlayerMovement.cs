@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
 using UnityEngine;
@@ -14,11 +15,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         var horizontal = Input.GetAxis("Horizontal");
-        if (horizontal > 0 || horizontal < 0)
+        var vertical = Input.GetAxis("Vertical");
+        if (horizontal > 0.1f || horizontal < 0.1f || vertical < 0.1f || vertical > 0.1f)
         {
-            var horizontalVector = new Vector3(horizontal, 0, 0);
-
-            transform.position = transform.position + horizontalVector * Time.deltaTime * 30;
+            GetComponent<Rigidbody2D>().AddForce(
+                new Vector2(
+                    horizontal * Time.deltaTime * 10000,
+                    vertical * Time.deltaTime * 10000
+                )
+            );
             GetComponent<Animator>().SetTrigger("Walk");
 
             if (horizontal < 0)
