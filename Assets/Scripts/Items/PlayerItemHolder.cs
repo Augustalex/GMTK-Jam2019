@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerItemHolder : MonoBehaviour
 {
+	public static PlayerItemHolder instance;
+
 	public ItemBase heldItem;
 	public ItemBase nearbyItem;
 
@@ -11,6 +13,8 @@ public class PlayerItemHolder : MonoBehaviour
 
     void Awake()
     {
+		instance = this;
+
 		if (itemHeldPosition == null)
 			itemHeldPosition = transform;
     }
@@ -27,7 +31,7 @@ public class PlayerItemHolder : MonoBehaviour
 		}
     }
 
-	private void PickupItem()
+	public void PickupItem()
 	{
 		if (nearbyItem == null)
 			return;
@@ -35,15 +39,17 @@ public class PlayerItemHolder : MonoBehaviour
 		heldItem = nearbyItem;
 		nearbyItem = null;
 
+		heldItem.circleCol.enabled = false;
 		heldItem.transform.position = itemHeldPosition.position;
 		heldItem.transform.parent = itemHeldPosition;
 	}
 
-	private void DropItem()
+	public void DropItem()
 	{
 		if (heldItem == null)
 			return;
 
+		heldItem.circleCol.enabled = true;
 		heldItem.transform.parent = null;
 		heldItem = null;
 	}

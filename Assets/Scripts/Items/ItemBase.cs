@@ -5,10 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D), typeof(SpriteRenderer))]
 public class ItemBase : MonoBehaviour
 {
+	public CircleCollider2D circleCol;
+
 	private void Reset()
 	{
 		GetComponent<CircleCollider2D>().isTrigger = true;
 		gameObject.tag = "Item";
+	}
+
+	private void Awake()
+	{
+		circleCol = GetComponent<CircleCollider2D>();
 	}
 
 	void Start()
