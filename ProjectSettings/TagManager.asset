@@ -38,9 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Floor
+  - name: UnderPlayer
     uniqueID: 3411070291
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: OverPlayer
+    uniqueID: 3195611619
     locked: 0
