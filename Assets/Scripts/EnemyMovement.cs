@@ -106,7 +106,7 @@ public class EnemyMovement : MonoBehaviour {
             IsEating = true;
             _body.velocity = Vector2.zero;
             await Task.Delay(2000);
-            Destroy(other.gameObject, 2.0f);
+            Destroy(other.gameObject);
             IsEating = false;
         }
     }
