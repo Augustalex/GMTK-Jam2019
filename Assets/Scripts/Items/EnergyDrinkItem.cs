@@ -9,7 +9,7 @@ public class EnergyDrinkItem : ItemBase
     {
     }
 
-    protected override void Use()
+    public override void Use()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerRushEffect>().Activate();
         DisposeOf();

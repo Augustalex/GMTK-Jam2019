@@ -29,6 +29,12 @@ public class PlayerItemHolder : MonoBehaviour
             else
                 DropItem();
         }
+        
+        
+        if (Input.GetKeyDown(KeyCode.F) && heldItem)
+        {
+            heldItem.Use();
+        }
     }
 
     public void PickupItem()

@@ -18,23 +18,10 @@ public abstract class ItemBase : MonoBehaviour
         circleCol = GetComponent<CircleCollider2D>();
     }
 
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Use();
-        }
-    }
-
-    protected abstract void Use();
+    public abstract void Use();
 
     public virtual void OnDrop()
     {
-        
     }
 
     protected void DisposeOf()

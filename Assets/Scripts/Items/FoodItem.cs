@@ -14,7 +14,7 @@ public class FoodItem : ItemBase
     {
     }
 
-    protected override void Use()
+    public override void Use()
     {
     }
 
