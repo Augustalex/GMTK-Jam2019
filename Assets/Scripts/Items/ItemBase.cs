@@ -24,7 +24,7 @@ public abstract class ItemBase : MonoBehaviour
     {
     }
 
-    protected void DisposeOf()
+    public void DisposeOf()
     {
         if (PlayerItemHolder.instance.heldItem == this)
         {

@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 6797561131429672297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.62, y: 0.86, z: -0.33389863}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 5967194075555336495}
   m_Father: {fileID: 0}
@@ -147,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.007840395, y: -0.6233275}
+  m_Offset: {x: -0.084519625, y: -0.06916189}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -158,7 +158,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.7406135, y: 1.5410018}
+  m_Size: {x: 4.537456, y: 4.362212}
   m_EdgeRadius: 0
 --- !u!50 &6797561131429672299
 Rigidbody2D:
@@ -173,7 +173,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -270,7 +270,8 @@ AudioSource:
   m_GameObject: {fileID: 6797561131429672297}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 1fd9ca1cacdb36a4b9d9d1dd0f11a0fe,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -317,7 +318,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -370,8 +371,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoudScream: {fileID: 8300000, guid: 4f4addfe5b3d7446cb4a03c581dc1ec8, type: 3}
-  SilentScream: {fileID: 8300000, guid: ee52851037e744cccaf3834166da13fb, type: 3}
+  LoudScreamFar: {fileID: 8300000, guid: 60e7d06f4f4c0cb4d99e12a06f01a06f, type: 3}
+  SilentScream: {fileID: 8300000, guid: bde550b6681004120b0b4ebc565aba22, type: 3}
+  SilentScreamFar: {fileID: 8300000, guid: 589f6100bb61d4348abeec3f197fb8c1, type: 3}
   BaitedScream: {fileID: 8300000, guid: bde550b6681004120b0b4ebc565aba22, type: 3}
+  BaitedScreamFar: {fileID: 8300000, guid: 589f6100bb61d4348abeec3f197fb8c1, type: 3}
 --- !u!1 &7036132014897148773
 GameObject:
   m_ObjectHideFlags: 0

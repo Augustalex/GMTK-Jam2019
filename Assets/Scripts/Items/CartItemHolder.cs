@@ -24,7 +24,23 @@ public class CartItemHolder : MonoBehaviour
             _cart.AddItem();
         }
 
-        item.transform.position = new Vector3(-1000, -1000);
+        item.transform.position = transform.position + new Vector3(.1f + Random.Range(-.1f, .1f), .6f + Random.Range(-.1f, .1f), 0);
+        var rotation = item.transform.rotation;
+        rotation.z = Random.Range(0, 360);
+        item.transform.rotation = rotation;
+        item.transform.parent = transform;
+
+        item.tag = "";
+        var drinkItemComponent = item.GetComponent<EnergyDrinkItem>();
+        if (drinkItemComponent)
+        {
+            Destroy(drinkItemComponent);
+        }
+        var foodItemComponent = item.GetComponent<FoodItem>();
+        if (foodItemComponent)
+        {
+            Destroy(foodItemComponent);
+        }
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)

@@ -7,6 +7,8 @@ public class PlayerLife : MonoBehaviour
 {
     private PlayerMovement _movement;
 
+    public bool Dead;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class PlayerLife : MonoBehaviour
 
     private void Die()
     {
+        Dead = true;
         _movement.Die();
     }
 }

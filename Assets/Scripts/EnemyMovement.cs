@@ -8,8 +8,8 @@ using Random = UnityEngine.Random;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private const float DiscoverPlayerRadius = 10.0f;
-    private const float Speed = 4;
+    private const float DiscoverPlayerRadius = 14.0f;
+    private const float Speed = 18;
 
     public bool Idle;
     public GameObject Face;
@@ -32,10 +32,12 @@ public class EnemyMovement : MonoBehaviour
     public delegate void statusChangedEvent(Status status);
 
     public statusChangedEvent statusChanged;
+    private PlayerLife _playerLife;
 
     private void Awake()
     {
         _player = GameObject.FindWithTag("Player");
+        _playerLife = _player.GetComponent<PlayerLife>();
         _body = GetComponent<Rigidbody2D>();
         _body.gravityScale = 0;
         _body.drag = Speed / 5.0f;
@@ -67,7 +69,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        if (IsEating)
+        if (IsEating || _playerLife.Dead)
         {
             return;
         }
@@ -148,23 +150,21 @@ public class EnemyMovement : MonoBehaviour
         return true;
     }
 
-    private async void OnTriggerEnter2D(Collider2D other)
+    private async void OnCollisionEnter2D(Collision2D other)
     {
+        if (Random.value < 0.2f)
+        {
+            _currentDirection = Random.insideUnitCircle;
+        }
+        
         if (other.gameObject.GetComponent<FoodItem>()?.Bait == true)
         {
             IsEating = true;
             _body.velocity = Vector2.zero;
             await Task.Delay(2000);
-            Destroy(other.gameObject);
+            
+            other.gameObject.GetComponent<ItemBase>().DisposeOf();
             IsEating = false;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (Random.value < 0.2f)
-        {
-            _currentDirection = Random.insideUnitCircle;
         }
     }
 }

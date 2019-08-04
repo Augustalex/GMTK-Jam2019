@@ -20,33 +20,18 @@ public class ItemSpawner : MonoBehaviour
             .ToList();
         _foodItemSpawns = GameObject.FindGameObjectsWithTag("FoodItemSpawn").Select(item => item.transform.position)
             .ToList();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        var totalFoodItemSpawns = _foodItemSpawns.Count;
-        for (var i = 0; i < totalFoodItemSpawns; i++)
-        {
-            var randomIndex = Random.Range(0, totalFoodItemSpawns);
-            var randomSpawn = _foodItemSpawns[randomIndex];
-            _foodItemSpawns.RemoveAt(randomIndex);
-
-            Instantiate(FoodItemPrefab, randomSpawn, Quaternion.identity);
-        }
-
+        
         SpawnStuff(_foodItemSpawns, FoodItemPrefab);
         SpawnStuff(_drinkItemSpawns, DrinkItemPrefab);
     }
-
-
+    
     private void SpawnStuff(List<Vector3> spawnPoints, GameObject prefab)
     {
-        var totalDrinkItemsToSpawn = (int) Math.Round(spawnPoints.Count * .5f);
+        var totalDrinkItemsToSpawn = (int) Math.Round(spawnPoints.Count() * .1f);
         for (var i = 0; i < totalDrinkItemsToSpawn; i++)
         {
-            var randomIndex = Random.Range(0, spawnPoints.Count);
-            if (randomIndex >= spawnPoints.Count) continue;
+            var randomIndex = Random.Range(0, spawnPoints.Count());
+            if (randomIndex >= spawnPoints.Count()) continue;
 
             var randomSpawn = spawnPoints[randomIndex];
             spawnPoints.RemoveAt(randomIndex);
