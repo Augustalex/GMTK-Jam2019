@@ -46,6 +46,8 @@ public class ItemSpawner : MonoBehaviour
         for (var i = 0; i < totalDrinkItemsToSpawn; i++)
         {
             var randomIndex = Random.Range(0, spawnPoints.Count);
+            if (randomIndex >= spawnPoints.Count) continue;
+
             var randomSpawn = spawnPoints[randomIndex];
             spawnPoints.RemoveAt(randomIndex);
 

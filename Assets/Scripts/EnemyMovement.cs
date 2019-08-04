@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyMovement : MonoBehaviour {
+public class EnemyMovement : MonoBehaviour
+{
     private const float DiscoverPlayerRadius = 10.0f;
     private const float Speed = 4;
 
+    public bool Idle;
     public GameObject Face;
     public bool IsEating;
     private GameObject _player;
@@ -18,7 +20,21 @@ public class EnemyMovement : MonoBehaviour {
     private Vector2 _nextDirection;
     private bool seingPlayer;
 
-    private void Awake() {
+    public enum Status
+    {
+        SeeingPlayer,
+        Idle,
+        Baited
+    }
+
+    private Status _status = Status.Idle;
+
+    public delegate void statusChangedEvent(Status status);
+
+    public statusChangedEvent statusChanged;
+
+    private void Awake()
+    {
         _player = GameObject.FindWithTag("Player");
         _body = GetComponent<Rigidbody2D>();
         _body.gravityScale = 0;
@@ -32,77 +48,110 @@ public class EnemyMovement : MonoBehaviour {
         sightSprite.transform.Translate(DiscoverPlayerRadius * 0.25f, 0, 0);
     }
 
-    private bool CanSeeObject(Vector3 position, Func<GameObject, bool> isObject) {
+    private bool CanSeeObject(Vector3 position, Func<GameObject, bool> isObject)
+    {
         var distance = Vector2.Distance(transform.position, position);
         var objectDirection = (position - transform.position).normalized;
-        var withinSight = Vector2.Angle(_currentDirection, objectDirection) <= 45;
+        var withinSight = Vector2.Angle(_currentDirection, objectDirection) <= 360;
         var withinDistance = distance <= DiscoverPlayerRadius;
         var objectVisible = IsObjectVisible(position, isObject);
         return withinDistance && withinSight && objectVisible;
     }
 
-    private Vector2 DirectionTo(Vector3 position) {
+    private Vector2 DirectionTo(Vector3 position)
+    {
         {
             return (position - transform.position).normalized;
         }
     }
 
-    private void Update() {
-        if (IsEating) {
+    private void Update()
+    {
+        if (IsEating)
+        {
             return;
         }
-        
+
+        var previousStatus = _status;
+
         var baits = GameObject.FindGameObjectsWithTag("Item")
             .Where(x => x.GetComponent<FoodItem>()?.Bait == true);
 
         Vector2? target = null;
-        foreach (var bait in baits) {
+        foreach (var bait in baits)
+        {
             var canSeeBait = CanSeeObject(bait.transform.position, o => o.CompareTag("Item"));
-            if (canSeeBait) {
+            if (canSeeBait)
+            {
                 target = bait.transform.position;
+
+                _status = Status.Baited;
             }
         }
 
         var canSeePlayer = CanSeeObject(_player.transform.position, o => o.CompareTag("Player"));
-        if (!target.HasValue && canSeePlayer) {
+        if (!target.HasValue && canSeePlayer)
+        {
             seingPlayer = true;
             target = _player.transform.position;
+
+            _status = Status.SeeingPlayer;
         }
 
-        if (target.HasValue) {
+        if (target.HasValue)
+        {
             _body.AddForce(_currentDirection * Speed * 0.9f, ForceMode2D.Force);
             _currentDirection = DirectionTo(target.Value);
         }
-        else {
+        else
+        {
             seingPlayer = false;
-            _body.AddForce(_currentDirection * Speed, ForceMode2D.Force);
-            if (Random.value < 0.04f) {
-                 _nextDirection = Random.insideUnitCircle;
+
+            if (Random.value < .01f)
+            {
+                _body.AddForce(_currentDirection * Speed, ForceMode2D.Force);
+                if (Random.value < 0.04f)
+                {
+                    _nextDirection = Random.insideUnitCircle;
+                }
             }
+
+            Idle= true;
+            _status = Status.Idle;
         }
 
         _currentDirection = Vector2.MoveTowards(_currentDirection, _nextDirection, 0.01f);
         var angle = Vector2.SignedAngle(Vector2.right, _currentDirection);
         Face.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        if (!previousStatus.Equals(_status))
+        {
+            statusChanged.Invoke(_status);
+        }
     }
 
-    private bool IsObjectVisible(Vector3 position, Func<GameObject, bool> isObject) {
+    private bool IsObjectVisible(Vector3 position, Func<GameObject, bool> isObject)
+    {
         var results = new List<RaycastHit2D>();
         var layerMask = ~ LayerMask.GetMask("Enemy");
-        var filter = new ContactFilter2D {
+        var filter = new ContactFilter2D
+        {
             useLayerMask = true,
             layerMask = layerMask
         };
 
-        if (Physics2D.Linecast(transform.position, position, filter, results) > 0) {
+        if (Physics2D.Linecast(transform.position, position, filter, results) > 0)
+        {
             return results.TrueForAll(x => isObject(x.collider.gameObject));
         }
 
         return true;
     }
 
-    private async void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.GetComponent<FoodItem>()?.Bait == true) {
+    private async void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponent<FoodItem>()?.Bait == true)
+        {
             IsEating = true;
             _body.velocity = Vector2.zero;
             await Task.Delay(2000);
@@ -110,8 +159,11 @@ public class EnemyMovement : MonoBehaviour {
             IsEating = false;
         }
     }
-    private void OnCollisionEnter2D(Collision2D other) {
-        if (Random.value < 0.2f) {
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (Random.value < 0.2f)
+        {
             _currentDirection = Random.insideUnitCircle;
         }
     }
