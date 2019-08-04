@@ -8,6 +8,8 @@ TagManager:
   - Cart
   - EndGameDoor
   - Enemy
+  - FoodItemSpawn
+  - DrinkItemSpawn
   layers:
   - Default
   - TransparentFX
