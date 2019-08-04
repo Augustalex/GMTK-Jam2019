@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class EnemyMovement : MonoBehaviour {
     private const float DiscoverPlayerRadius = 10.0f;
-    private const float Speed = 5;
+    private const float Speed = 4;
 
     public GameObject Face;
     public bool IsEating;

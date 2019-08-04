@@ -779,6 +779,21 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.b
       value: 0.13207549
       objectReference: {fileID: 0}
+    - target: {fileID: 3415831183412802554, guid: 358b9ed4e70e62b4095c849954124f84,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415831183412802554, guid: 358b9ed4e70e62b4095c849954124f84,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415831183412802554, guid: 358b9ed4e70e62b4095c849954124f84,
+        type: 3}
+      propertyPath: m_Range
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8424430440724974858, guid: 358b9ed4e70e62b4095c849954124f84, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 358b9ed4e70e62b4095c849954124f84, type: 3}
