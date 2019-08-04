@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public bool Rushing;
     private AudioSource _audioSource;
     private float _timeSincePlayedWalkSound;
-    private bool _dead;
+    public bool Dead;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_dead) return;
+        if (Dead) return;
 
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
@@ -66,9 +66,9 @@ public class PlayerMovement : MonoBehaviour
         if (_timeSincePlayedWalkSound > .5f && Random.value > .3f)
         {
             _timeSincePlayedWalkSound = 0;
-            
+
             _audioSource.clip = GetRandomWalkingClip();
-            _audioSource.volume = Random.Range(0.05f, .1f);
+            _audioSource.volume = Random.Range(.01f, .02f);
             _audioSource.Play();
         }
 
@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _animator.SetTrigger("Die");
         _body.velocity = Vector2.zero;
-        _dead = true;
+        Dead = true;
     }
 
     private int GetVelocity()

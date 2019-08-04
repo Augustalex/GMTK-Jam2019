@@ -30,7 +30,7 @@ public class CartItemHolder : MonoBehaviour
         item.transform.rotation = rotation;
         item.transform.parent = transform;
 
-        item.tag = "";
+        item.tag = "Untagged";
         var drinkItemComponent = item.GetComponent<EnergyDrinkItem>();
         if (drinkItemComponent)
         {

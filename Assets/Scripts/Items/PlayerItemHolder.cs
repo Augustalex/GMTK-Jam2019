@@ -10,6 +10,7 @@ public class PlayerItemHolder : MonoBehaviour
     public ItemBase nearbyItem;
 
     public Transform itemHeldPosition;
+    private float _timeSinceHeltAnItem;
 
     void Awake()
     {
@@ -29,11 +30,20 @@ public class PlayerItemHolder : MonoBehaviour
             else
                 DropItem();
         }
-        
-        
+
+
         if (Input.GetKeyDown(KeyCode.F) && heldItem)
         {
             heldItem.Use();
+        }
+
+        if (!heldItem)
+        {
+            _timeSinceHeltAnItem += Time.deltaTime;
+        }
+        else
+        {
+            _timeSinceHeltAnItem = 0;
         }
     }
 
@@ -54,11 +64,16 @@ public class PlayerItemHolder : MonoBehaviour
     {
         if (heldItem == null)
             return;
-        
+
         heldItem.OnDrop();
 
         heldItem.circleCol.enabled = true;
         heldItem.transform.parent = null;
         heldItem = null;
+    }
+
+    public bool RecentlyHeldAnItem()
+    {
+        return _timeSinceHeltAnItem < .5f;
     }
 }

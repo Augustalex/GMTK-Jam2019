@@ -3773,10 +3773,10 @@ Transform:
   - {fileID: 556287911}
   - {fileID: 1236928901}
   - {fileID: 187993757}
-  - {fileID: 1606340773}
   - {fileID: 356765244}
-  - {fileID: 913728978}
   - {fileID: 1498377332}
+  - {fileID: 913728978}
+  - {fileID: 1606340773}
   - {fileID: 356190814}
   - {fileID: 1549191359}
   - {fileID: 1389580660}
@@ -11079,12 +11079,12 @@ PrefabInstance:
     - target: {fileID: 3908872898849419986, guid: 358b9ed4e70e62b4095c849954124f84,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.3
+      value: -5.845461
       objectReference: {fileID: 0}
     - target: {fileID: 3908872898849419986, guid: 358b9ed4e70e62b4095c849954124f84,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -69.2
+      value: -69.85132
       objectReference: {fileID: 0}
     - target: {fileID: 3908872898849419986, guid: 358b9ed4e70e62b4095c849954124f84,
         type: 3}

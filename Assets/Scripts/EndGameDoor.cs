@@ -14,12 +14,9 @@ public class EndGameDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.gameObject.name);
         var component = other.transform.parent.GetComponent<Cart>();
-        Debug.Log(component);
         if (component)
         {
-            Debug.Log("aasdasds");
             _hasEnded = true;
         }
     }

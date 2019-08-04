@@ -7,8 +7,8 @@ using Random = UnityEngine.Random;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private const float DiscoverPlayerRadius = 12.0f;
-    private const float Speed = 14;
+    private const float DiscoverPlayerRadius = 8.0f;
+    private const float Speed = 8;
 
     public bool Idle;
     public GameObject Face;
