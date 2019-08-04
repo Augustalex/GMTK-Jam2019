@@ -1,5 +1,5 @@
-using System;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,10 +14,14 @@ public class Cart : MonoBehaviour
     private GameObject _player;
     private Vector3 _riderOriginalDistanceToCart;
     private double _timeSinceLastRide;
+    private Rigidbody2D _body;
+    private Animator _animator;
 
     public void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        _body = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         _audioSource.clip = CartPush;
     }
@@ -44,6 +48,17 @@ public class Cart : MonoBehaviour
         else
         {
             _timeSinceLastRide += Time.deltaTime;
+        }
+
+        var velocityMagnitude = _body.velocity.magnitude;
+        Debug.Log("velocityMagnitude " + velocityMagnitude);
+        if (velocityMagnitude > 0)
+        {
+            _animator.SetTrigger("Ride");
+        }
+        else
+        {
+            _animator.SetTrigger("Idle");
         }
     }
 

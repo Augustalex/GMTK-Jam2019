@@ -160,6 +160,8 @@ public class EnemyMovement : MonoBehaviour
         var foodItem = other.gameObject.GetComponent<FoodItem>();
         if (foodItem && foodItem.Bait)
         {
+            await Task.Delay(1000);
+
             IsEating = true;
             _body.velocity = Vector2.zero;
             await Task.Delay(2000);
