@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerItemHolder : MonoBehaviour
 {
@@ -11,6 +9,7 @@ public class PlayerItemHolder : MonoBehaviour
 
     public Transform itemHeldPosition;
     private float _timeSinceHeltAnItem;
+    private float _timeSincePickedUpItem;
 
     void Awake()
     {
@@ -25,10 +24,14 @@ public class PlayerItemHolder : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (heldItem == null)
-                PickupItem();
-            else
-                DropItem();
+            var cartPosition = CartItemHolder.instance.gameObject.transform.position;
+            if (Vector2.Distance(transform.position, cartPosition) > 2f)
+            {
+                if (heldItem == null)
+                    PickupItem();
+                else
+                    DropItem();
+            }
         }
 
 
@@ -37,13 +40,14 @@ public class PlayerItemHolder : MonoBehaviour
             heldItem.Use();
         }
 
-        if (!heldItem)
+        if (heldItem)
         {
-            _timeSinceHeltAnItem += Time.deltaTime;
+            _timeSincePickedUpItem += Time.deltaTime;
+            _timeSinceHeltAnItem = 0;
         }
         else
         {
-            _timeSinceHeltAnItem = 0;
+            _timeSinceHeltAnItem += Time.deltaTime;
         }
     }
 
@@ -51,6 +55,8 @@ public class PlayerItemHolder : MonoBehaviour
     {
         if (nearbyItem == null)
             return;
+
+        _timeSincePickedUpItem = 0;
 
         heldItem = nearbyItem;
         nearbyItem = null;
@@ -65,15 +71,27 @@ public class PlayerItemHolder : MonoBehaviour
         if (heldItem == null)
             return;
 
-        heldItem.OnDrop();
+        var item = TransferItemAway();
+        item.OnDrop();
+    }
 
+    public ItemBase TransferItemAway()
+    {
         heldItem.circleCol.enabled = true;
         heldItem.transform.parent = null;
+
+        var item = heldItem;
         heldItem = null;
+        return item;
     }
 
     public bool RecentlyHeldAnItem()
     {
         return _timeSinceHeltAnItem < .5f;
+    }
+
+    public bool HaveRecentlyPickedUpItem()
+    {
+        return _timeSincePickedUpItem < .1f;
     }
 }

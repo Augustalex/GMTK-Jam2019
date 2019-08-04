@@ -8,12 +8,31 @@ public class CartItemHolder : MonoBehaviour
 
     public List<ItemBase> items = new List<ItemBase>();
     private Cart _cart;
+    private GameObject _player;
 
     private void Awake()
     {
         instance = this;
 
+        _player = GameObject.FindGameObjectWithTag("Player");
         _cart = GetComponent<Cart>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var distance = Vector2.Distance(transform.position, _player.transform.position);
+            if (distance <= 2f)
+            {
+                var playerItemHolder = _player.GetComponent<PlayerItemHolder>();
+                if (playerItemHolder.heldItem && !playerItemHolder.HaveRecentlyPickedUpItem())
+                {
+                    var item = playerItemHolder.TransferItemAway();
+                    AddItem(item);
+                }
+            }
+        }
     }
 
     public void AddItem(ItemBase item)
@@ -40,15 +59,6 @@ public class CartItemHolder : MonoBehaviour
         if (foodItemComponent)
         {
             Destroy(foodItemComponent);
-        }
-    }
-
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Item")
-        {
-            AddItem(collision.GetComponent<ItemBase>());
-            PlayerItemHolder.instance.DropItem();
         }
     }
 }
