@@ -145,6 +145,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 363fb6bde7237674c9ab1b4ea4db05a3, type: 3}
   - {fileID: 8300000, guid: bd2e21727b290c94586e70231e309cbd, type: 3}
   Rushing: 0
+  Dead: 0
 --- !u!50 &3908872898849419948
 Rigidbody2D:
   serializedVersion: 4
@@ -521,7 +522,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bd50d4b1ac6dcf342a096dc18c3e7025, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eba5728508ad48a40af766da5bb784ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
