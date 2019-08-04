@@ -29,8 +29,9 @@ public abstract class ItemBase : MonoBehaviour
         if (PlayerItemHolder.instance.heldItem == this)
         {
             PlayerItemHolder.instance.heldItem = null;
-            Destroy(gameObject);
         }
+
+        Destroy(gameObject);
     }
 
     public void Pickup()

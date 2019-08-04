@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,8 +7,8 @@ using Random = UnityEngine.Random;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private const float DiscoverPlayerRadius = 14.0f;
-    private const float Speed = 18;
+    private const float DiscoverPlayerRadius = 12.0f;
+    private const float Speed = 14;
 
     public bool Idle;
     public GameObject Face;
@@ -53,11 +52,9 @@ public class EnemyMovement : MonoBehaviour
     private bool CanSeeObject(Vector3 position, Func<GameObject, bool> isObject)
     {
         var distance = Vector2.Distance(transform.position, position);
-        var objectDirection = (position - transform.position).normalized;
-        var withinSight = Vector2.Angle(_currentDirection, objectDirection) <= 360;
         var withinDistance = distance <= DiscoverPlayerRadius;
         var objectVisible = IsObjectVisible(position, isObject);
-        return withinDistance && withinSight && objectVisible;
+        return withinDistance && objectVisible;
     }
 
     private Vector2 DirectionTo(Vector3 position)
@@ -118,7 +115,7 @@ public class EnemyMovement : MonoBehaviour
                 }
             }
 
-            Idle= true;
+            Idle = true;
             _status = Status.Idle;
         }
 
@@ -150,20 +147,24 @@ public class EnemyMovement : MonoBehaviour
         return true;
     }
 
-    private async void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (Random.value < 0.2f)
         {
             _currentDirection = Random.insideUnitCircle;
         }
-        
-        if (other.gameObject.GetComponent<FoodItem>()?.Bait == true)
+    }
+
+    private async void OnTriggerEnter2D(Collider2D other)
+    {
+        var foodItem = other.gameObject.GetComponent<FoodItem>();
+        if (foodItem && foodItem.Bait)
         {
             IsEating = true;
             _body.velocity = Vector2.zero;
             await Task.Delay(2000);
-            
-            other.gameObject.GetComponent<ItemBase>().DisposeOf();
+
+            foodItem.DisposeOf();
             IsEating = false;
         }
     }
